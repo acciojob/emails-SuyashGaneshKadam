@@ -38,6 +38,10 @@ public class Email {
             boolean upper = false, lower = false, digit = false, special = false;
             for(int i=0 ; i<newPassword.length() ; i++)
             {
+                if(lower && upper && digit && special)
+                {
+                    break;
+                }
                 char ch = newPassword.charAt(i);
                 if(ch >= '0' && ch <= '9')
                 {
@@ -58,6 +62,7 @@ public class Email {
             }
             if(lower && upper && digit && special)
             {
+                this.password = newPassword;
                 System.out.println("Password changed successfully");
             }
             else
