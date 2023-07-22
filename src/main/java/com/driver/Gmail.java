@@ -56,7 +56,7 @@ public class Gmail extends Email {
         // Else, return the message of the latest mail present in the inbox
         if(inbox.size() == 0)
         {
-            return "null";
+            return null;
         }
         else
         {
@@ -69,7 +69,7 @@ public class Gmail extends Email {
         // Else, return the message of the oldest mail present in the inbox
         if(inbox.size() == 0)
         {
-            return "null";
+            return null;
         }
         else
         {
