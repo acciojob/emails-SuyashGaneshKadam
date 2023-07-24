@@ -15,16 +15,16 @@ class Mail
 }
 public class Gmail extends Email {
 
-    LinkedList<Mail> inbox;
-    LinkedList<Mail> trash;
+    ArrayList<Mail> inbox;
+    ArrayList<Mail> trash;
     int inboxCapacity; //maximum number of mails inbox can store
     //Inbox: Stores mails. Each mail has date (Date), sender (String), message (String). It is guaranteed that message is distinct for all mails.
     //Trash: Stores mails. Each mail has date (Date), sender (String), message (String)
     public Gmail(String emailId, int inboxCapacity) {
         super(emailId);
         this.inboxCapacity = inboxCapacity;
-        inbox = new LinkedList<>();
-        trash = new LinkedList<>();
+        inbox = new ArrayList<>();
+        trash = new ArrayList<>();
     }
 
     public void receiveMail(Date date, String sender, String message){
@@ -80,6 +80,10 @@ public class Gmail extends Email {
     public int findMailsBetweenDates(Date start, Date end){
         //find number of mails in the inbox which are received between given dates
         //It is guaranteed that start date <= end date
+        if(inbox.size() == 0)
+        {
+            return 0;
+        }
         int count = 0;
         for(int i=0 ; i<inbox.size() ; i++)
         {
