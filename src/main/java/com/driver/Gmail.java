@@ -27,6 +27,12 @@ public class Gmail extends Email {
         trash = new ArrayList<>();
     }
 
+    public Gmail(String emailId)
+    {
+        super(emailId);
+        this.inboxCapacity = Integer.MAX_VALUE;
+    }
+
     public void receiveMail(Date date, String sender, String message){
         // If the inbox is full, move the oldest mail in the inbox to trash and add the new mail to inbox.
         // It is guaranteed that:
