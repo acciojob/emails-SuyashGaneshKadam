@@ -1,22 +1,22 @@
 package com.driver;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-class Node
+import java.util.*;
+class Mail
 {
     Date date;
     String message;
-    Node(Date date, String message)
+    String sender;
+    Mail(Date date, String message, String sender)
     {
         this.date = date;
         this.message = message;
+        this.sender = sender;
     }
 }
 public class Gmail extends Email {
 
-    LinkedList<Node> inbox;
-    LinkedList<Node> trash;
+    LinkedList<Mail> inbox;
+    LinkedList<Mail> trash;
     int inboxCapacity; //maximum number of mails inbox can store
     //Inbox: Stores mails. Each mail has date (Date), sender (String), message (String). It is guaranteed that message is distinct for all mails.
     //Trash: Stores mails. Each mail has date (Date), sender (String), message (String)
@@ -36,15 +36,15 @@ public class Gmail extends Email {
         {
             trash.add(inbox.remove(0));
         }
-        inbox.add(new Node(date, message));
+        inbox.add(new Mail(date, message, sender));
     }
     public void deleteMail(String message){
         // Each message is distinct
         // If the given message is found in any mail in the inbox, move the mail to trash, else do nothing
         for(int i=0 ; i<inbox.size() ; i++)
         {
-            Node node = inbox.get(i);
-            if(node.message.equals(message))
+            Mail mail = inbox.get(i);
+            if(mail.message.equals(message))
             {
                 inbox.remove(i);
             }
@@ -81,20 +81,12 @@ public class Gmail extends Email {
         //find number of mails in the inbox which are received between given dates
         //It is guaranteed that start date <= end date
         int count = 0;
-        if(inbox.size() == 0)
+        for(int i=0 ; i<inbox.size() ; i++)
         {
-            return count;
-        }
-        else
-        {
-            for(int i=0 ; i<inbox.size() ; i++)
-            {
-                Node node = inbox.get(i);
-                Date dt = node.date;
-                if((dt.equals(start) || dt.after(start)) && (dt.equals(end) || dt.before(end)))
-                {
-                    count++;
-                }
+            Mail mail = inbox.get(i);
+            Date dt = mail.date;
+            if ((dt.equals(start) || dt.after(start)) && (dt.equals(end) || dt.before(end))) {
+                count++;
             }
         }
         return count;
