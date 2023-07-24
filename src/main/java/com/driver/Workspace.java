@@ -31,7 +31,7 @@ public class Workspace extends Gmail{
         calendar.sort(Comparator.comparing(Meeting::getStartTime));
         LocalTime prev = calendar.get(0).getEndTime();
         int count = 1;
-        for(int i=0 ; i<calendar.size() ; i++)
+        for(int i=1 ; i<calendar.size() ; i++)
         {
             LocalTime curr = calendar.get(i).getStartTime();
             if(prev.isBefore(curr))
